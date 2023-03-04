@@ -1,10 +1,16 @@
-node('node1') {
-    stage('vcs') {
-        git url: 'https://github.com/ramyagaraga/openmrs-core.git',
-            branch: 'scripted'
-    } 
-
-    stage('Build') {
-        sh 'mvn clean package'
+pipeline {
+    agent { label 'node1'}
+    stages {
+        stage('vcs') {
+            steps {
+                git url: 'https://github.com/ramyagaraga/openmrs-core.git',
+                    branch: 'declarative'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
     }
 }
